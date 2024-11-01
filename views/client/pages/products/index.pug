@@ -1,4 +1,16 @@
 extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
 
 block main 
-    h1 Trang danh sach san pham
+ .container.my-3
+  .row
+    +box-head("Danh sách sản phẩm")
+  .row
+    .col-4.mb-3.product-item
+      .inner
+        img(src="https://cdn.dummyjson.com/products/images/vehicle/Charger%20SXT%20RWD/thumbnail.png" alt="iPhone 9")
+        .inner-content
+          .inner-title iPhone 9
+          .inner-price-old 100$
+          .inner-price-new 80$
+          .inner-discount -20%
