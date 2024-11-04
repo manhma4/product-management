@@ -1,4 +1,4 @@
-// Button status
+// Button Status
 const buttonsStatus = document.querySelectorAll("[button-status]");
 
 if (buttonsStatus.length > 0) {
@@ -16,4 +16,23 @@ if (buttonsStatus.length > 0) {
     });
   });
 }
-// End Button status
+// End Button Status
+
+// Form search
+const formSearch = document.querySelector("#form-search");
+if (formSearch) {
+  let url = new URL(window.location.href);
+
+  formSearch.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const keyWord = e.target.elements.keyword.value;
+
+    if (keyWord) {
+      url.searchParams.set("keyword", keyWord);
+    } else {
+      url.searchParams.delete("keyword");
+    }
+    window.location.href = url.href;
+  });
+}
+// End Form Search
