@@ -33,7 +33,7 @@ block main
             )
                 option(selected disabled) -- Chọn danh mục --
                 if (category)
-                    +select-tree(category)
+                    +select-tree(category, 1, product.product_category_id)
 
         div(class="form-group")
             label(for="desc") Mô tả
