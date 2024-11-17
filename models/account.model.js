@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const generate = require("../helpers/generate");
+const generate = require("../helper/generate");
 const accountSchema = new mongoose.Schema(
   {
     fullName: String,
@@ -23,5 +23,5 @@ const accountSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Account = mongoose.model("Account", acountSchema, "accounts");
+const Account = mongoose.model("Account", accountSchema, "accounts");
 module.exports = Account;
