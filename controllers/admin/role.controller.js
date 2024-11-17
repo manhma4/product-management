@@ -82,7 +82,7 @@ module.exports.permissionPatch = async (req, res) => {
   try {
     let arr = JSON.parse(req.body.permissions);
     arr.forEach(async (element) => {
-      console.log(element);
+      // console.log(element);
       await Role.updateOne(
         {
           _id: element.id,
