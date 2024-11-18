@@ -170,7 +170,6 @@ module.exports.create = async (req, res) => {
     deleted: false,
   };
   const category = await ProductCategory.find(find);
-  console.log(category);
   const treeCategory = createTreeHelper.tree(category);
 
   res.render("admin/pages/products/create", {
