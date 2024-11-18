@@ -51,6 +51,7 @@ block main
                                 th Vị trí
                                 th Trạng thái
                                 th Người tạo
+                                th Người sửa gần nhất
                                 th Hành động
                         tbody
                             each item, index in products
@@ -95,8 +96,13 @@ block main
                                                 class="badge badge-danger"
                                                 ) Dừng hoạt động
                                     td
-                                        p #{item.accountfullName}
-                                        +format-dateTime(item.createdBy.createdAt)
+                                        if(item.accountfullName)
+                                            p #{item.accountfullName}
+                                            +format-date(item.createdBy.createdAt)
+                                    td
+                                        if(item.accountfullNameEdit)
+                                            p #{item.accountfullNameEdit}
+                                            +format-date(item.updatedBy.createdAt)
                                     td
                                         a(
                                             href=`${prefixAdmin}/products/detail/${item.id}`

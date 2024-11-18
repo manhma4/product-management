@@ -54,11 +54,20 @@ module.exports.index = async (req, res) => {
     .skip(objectPagination.skip);
 
   for (const product of products) {
+    //tìm ra người tạo
     const user = await Account.findOne({
       _id: product.createdBy.account_id,
     });
     if (user) {
       product.accountfullName = user.fullName;
+    }
+    //tìm người sửa cuối cùng
+    const updatedBy = product.updatedBy.slice(-1)[0];
+    if (updatedBy) {
+      const userUpdate = await Account.findOne({
+        _id: updatedBy.account_id,
+      });
+      product.accountfullNameEdit = userUpdate.fullName;
     }
   }
 
@@ -231,12 +240,23 @@ module.exports.editPatch = async (req, res) => {
   // if (req.file) {
   //   req.body.thumbnail = `/uploads/${req.file.filename}`;
   // }
+
+  const updatedBy = {
+    account_id: res.locals.user.id,
+    updatedAt: new Date(),
+  };
+
   try {
     await Product.updateOne(
       {
         _id: req.params.id,
       },
-      req.body
+      {
+        $set: req.body, // Cập nhật các trường trong body
+        $push: {
+          updatedBy: updatedBy, // Thêm log mới vào mảng updatedBy
+        },
+      }
     );
     req.flash("success", "Cập nhật thành công sản phẩm");
   } catch (error) {
