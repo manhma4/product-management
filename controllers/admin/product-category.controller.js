@@ -48,6 +48,13 @@ module.exports.create = async (req, res) => {
 // [POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
   // console.log(req.body);
+
+  //phân quyền bên backend
+  // const permissions = res.locals.role.permissions
+  //   if (permissions.include("product-category_create")) {
+  //       req.body.position = parseInt(req.body.position)
+  //   }
+
   if (req.body.position) {
     req.body.position = parseInt(req.body.position);
   } else {
