@@ -44,3 +44,39 @@ module.exports.category = async (req, res) => {
     pageTitle: category.title,
   });
 };
+
+// [GET] /products/detail/:slugProduct
+module.exports.detail = async (req, res) => {
+  try {
+    // console.log(req.params.slug)
+    const find = {
+      deleted: false,
+      slug: req.params.slugProduct,
+      status: "active",
+    };
+    const product = await Product.findOne(find);
+    // console.log(product)
+    if (product.product_category_id) {
+      console.log(product.product_category_id);
+      const category = await ProductCategory.findOne({
+        _id: product.product_category_id,
+        deleted: false,
+        status: "active",
+      });
+      if (category) {
+        product.category = category;
+      }
+    }
+    product.priceNew = productHelper.getNewPriceOne(
+      product.price,
+      product.discountPercentage
+    );
+    // console.log(product.priceNew)
+    res.render("client/pages/products/detail.pug", {
+      pageTitle: product.title,
+      product: product,
+    });
+  } catch (error) {
+    res.redirect("/products");
+  }
+};
