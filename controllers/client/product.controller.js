@@ -57,7 +57,6 @@ module.exports.detail = async (req, res) => {
     const product = await Product.findOne(find);
     // console.log(product)
     if (product.product_category_id) {
-      console.log(product.product_category_id);
       const category = await ProductCategory.findOne({
         _id: product.product_category_id,
         deleted: false,
