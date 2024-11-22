@@ -30,7 +30,7 @@ block main
                                         img(src=item.productInfo.thumbnail, alt=item.productInfo.title width="80px")
                                     td 
                                         a(href=`/products/detail/${item.productInfo.slug}`) #{item.productInfo.title}
-                                    td #{item.productInfo.priceNew}
+                                    td #{item.productInfo.priceNew}$
                                     td 
                                         input(
                                             type="number"
@@ -40,7 +40,7 @@ block main
                                             product-id=item.product_id
                                             name="quantity"
                                         )
-                                    td #{item.totalPrice}
+                                    td #{item.totalPrice}$
                                     td
                                         a(
                                             href=`/cart/delete/${item.product_id}`
@@ -55,4 +55,4 @@ block main
                         href="/checkout"
                         class="btn btn-success"
                     ) Thanh toán
-    //- script(src="/js/cart.js") 
+    script(src="/js/cart.js") 
