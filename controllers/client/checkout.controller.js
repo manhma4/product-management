@@ -74,6 +74,37 @@ module.exports.order = async (req, res) => {
     }
   );
   // console.log(products)
-  console.log(objectOrder);
-  res.send("OK");
+  // console.log(objectOrder);
+  res.redirect(`/checkout/order/success/${order.id}`);
+};
+
+// [GET] /checkout/order/success
+module.exports.orderSuccess = async (req, res) => {
+  // console.log(req.params.id)
+  const order = await Order.findOne({
+    _id: req.params.id,
+  });
+  // console.log(order)
+  let totalOrderPrice = 0;
+  for (const product of order.products) {
+    const productInfo = await Product.findOne({
+      _id: product.product_id,
+    }).select("title thumbnail");
+
+    product.productInfo = productInfo;
+
+    product.priceNew = productHelper.getNewPriceOne(
+      product.price,
+      product.discountPercentage
+    );
+
+    product.totalPrice = product.priceNew * product.quantity;
+    // console.log(priceNew)
+    totalOrderPrice += product.totalPrice;
+  }
+  order.totalOrderPrice = totalOrderPrice;
+  res.render("client/pages/checkout/success.pug", {
+    pageTitle: "Đặt hàng thành công",
+    order: order,
+  });
 };
