@@ -6,7 +6,7 @@ module.exports.general = async (req, res) => {
   // console.log(settingGeneral)
   res.render("admin/pages/settings/general.pug", {
     pageTitle: "Cài đặt chung",
-    // settingGeneral: settingGeneral,
+    settingGeneral: settingGeneral,
   });
 };
 
