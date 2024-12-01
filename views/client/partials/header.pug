@@ -42,6 +42,8 @@ header.header
                                 a(href="/user/register") Đăng ký
                             li    
                                 a(href="/user/login") Đăng nhập
-                        else 
+                        else
+                            li 
+                                a(href="/user/info") #{user.fullName}
                             li 
                                 a(href="/user/logout") Đăng xuất

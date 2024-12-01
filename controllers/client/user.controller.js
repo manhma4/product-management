@@ -4,6 +4,7 @@ const ForgotPassword = require("../../models/forgot-password.model");
 const generateHelper = require("../../helper/generate");
 const sendMailHelper = require("../../helper/sendMail");
 const md5 = require("md5");
+
 // [GET] user/register
 module.exports.register = async (req, res) => {
   res.render("client/pages/user/register", {
@@ -146,6 +147,7 @@ module.exports.resetPassword = async (req, res) => {
     pageTitle: "Đặt lại mật khẩu",
   });
 };
+
 // [POST] /user/password/reset
 module.exports.resetPasswordPost = async (req, res) => {
   const password = req.body.password;
@@ -163,4 +165,11 @@ module.exports.resetPasswordPost = async (req, res) => {
   );
   req.flash("success", "Đổi mật khẩu thành công");
   res.redirect("/");
+};
+
+// [GET] /user/info
+module.exports.info = async (req, res) => {
+  res.render("client/pages/user/info.pug", {
+    pageTitle: "Tài khoản",
+  });
 };
