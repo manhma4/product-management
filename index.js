@@ -39,9 +39,7 @@ const server = http.createServer(app);
 
 const io = new Server(server); // Kết hợp server với socket
 
-io.on("connection", (socket) => {
-  console.log("a user connected", socket.id);
-});
+global._io = io;
 
 // Flash
 app.use(cookieParser("ABCABCABCCCCCCC"));
